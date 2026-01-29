@@ -1,0 +1,163 @@
+{
+  "regime": "lucro_real",
+
+  "descricao": "Regras gerais de tributação do Lucro Real, considerando legislação federal e municipal padrão, sem aplicação de benefícios fiscais específicos ou regimes especiais concedidos individualmente",
+
+  "escopo": {
+    "considera_beneficios_fiscais_especificos": false,
+    "descricao": "Este conjunto de regras considera apenas a legislação geral aplicável à maioria das empresas, sem incentivos fiscais regionais, setoriais ou regimes especiais"
+  },
+
+  "apuracao_padrao": {
+    "irpj": "trimestral",
+    "csll": "trimestral",
+    "demais_tributos": "mensal"
+  },
+
+  "impostos_federais": {
+    "irpj": {
+      "aliquota_base": 0.15,
+      "apuracao": "trimestral",
+      "adicional": {
+        "limite_mensal": 20000,
+        "aliquota": 0.10
+      },
+      "retencao": {
+        "aplicavel": true,
+        "natureza": "irrf",
+        "observacao": "Retenção pode ocorrer conforme natureza do serviço prestado"
+      }
+    },
+
+    "csll": {
+      "aliquota": 0.09,
+      "apuracao": "trimestral",
+      "retencao": {
+        "aplicavel": true,
+        "aliquota_padrao": 0.01,
+        "observacao": "CSLL pode ser retida em serviços conforme legislação vigente"
+      }
+    }
+  },
+
+  "lucro_contabil": {
+    "base": "resultado_contabil",
+    "ajustes": {
+      "adicoes": [
+        "despesas_nao_dedutiveis",
+        "provisoes_nao_dedutiveis"
+      ],
+      "exclusoes": [
+        "receitas_isentas",
+        "subvencoes_para_investimento"
+      ]
+    },
+    "compensacao_prejuizo": {
+      "permitido": true,
+      "limite_percentual": 0.30
+    }
+  },
+
+  "pis_cofins": {
+    "ativo": false,
+    "regime_anterior": "nao_cumulativo",
+    "substituido_por": "CBS",
+    "ano_substituicao": 2027
+  },
+
+  "cbs": {
+    "ativo": true,
+    "aliquota": 0.009,
+    "apuracao": "mensal",
+    "creditos_permitidos": true,
+    "base_credito": [
+      "compras_para_revenda",
+      "insumos",
+      "energia_eletrica",
+      "aluguel",
+      "servicos_utilizados_na_atividade",
+      "fretes"
+    ],
+    "vedacoes_credito": [
+      "despesas_pessoais",
+      "multas",
+      "juros_mora"
+    ],
+    "retencao": {
+      "aplicavel": true,
+      "observacao": "Retenção de CBS pode ocorrer conforme legislação e tipo de operação"
+    }
+  },
+
+  "inss_patronal": {
+    "aliquota": 0.20,
+    "apuracao": "mensal",
+    "incide_sobre": "folha",
+    "retencao": {
+      "aplicavel": true,
+      "aliquota_retencao": 0.11,
+      "observacao": "Retenção de INSS ocorre principalmente em prestação de serviços mediante cessão ou empreitada"
+    }
+  },
+
+  "impostos_indiretos": {
+    "iss": {
+      "ativo": true,
+      "apuracao": "mensal",
+      "aliquota_padrao": null,
+      "retencao": {
+        "aplicavel": true,
+        "observacao": "ISS pode ser retido pelo tomador conforme legislação municipal"
+      }
+    },
+
+    "icms": {
+      "ativo": true,
+      "apuracao": "mensal",
+      "credito_permitido": true
+    },
+
+    "ipi": {
+      "ativo": true,
+      "apuracao": "mensal",
+      "credito_permitido": true,
+      "observacao": "IPI considerado conforme regra geral, sem incentivos ou regimes especiais"
+    }
+  },
+
+  "impostos_retidos_federais": {
+    "pis": {
+      "aliquota_retencao": 0.0065
+    },
+    "cofins": {
+      "aliquota_retencao": 0.03
+    },
+    "csll": {
+      "aliquota_retencao": 0.01
+    }
+  },
+
+  "fallback": {
+    "assumir_credito_zero_se_nao_informado": true,
+    "assumir_retencao_zero_se_nao_informado": true
+  },
+
+  "referencias_legais": [
+    {
+      "fonte": "Decreto-Lei 1.598/1977",
+      "descricao": "Base do Lucro Real e ajustes do lucro líquido"
+    },
+    {
+      "fonte": "Lei 9.430/1996",
+      "descricao": "IRPJ, CSLL e compensação de prejuízos fiscais"
+    },
+    {
+      "fonte": "Lei 10.833/2003",
+      "descricao": "Regras gerais de retenções federais (PIS, COFINS, CSLL)"
+    },
+    {
+      "fonte": "Lei Complementar 214/2025",
+      "descricao": "Criação da CBS e substituição do PIS/COFINS"
+    }
+  ]
+}
